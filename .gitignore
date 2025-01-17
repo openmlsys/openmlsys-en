@@ -12,3 +12,4 @@ test*.md
 run.sh
 .idea
 env
+venv
