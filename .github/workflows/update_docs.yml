@@ -29,7 +29,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      # Install Python dependencies
+
+      # Install Pandoc using apt-get
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+          
+      # Install Python dependencies and build the HTML documentation
       - name: Install dependencies
         run: |
           python -m venv venv
@@ -37,36 +44,17 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install sphinx-mathjax-offline
-
-      # Install Pandoc using apt-get
-      - name: Install Pandoc
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc
-
-      # Clone and install the d2l-book repository
-      - name: Clone and install d2l-book
-        run: |
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
           pip install .
-
-      # Build the HTML documentation
-      - name: Build HTML Documentation
-        run: |
-          source ../venv/bin/activate
+          cd ..
           sh build_html.sh
 
       # Clone the html-en repository
       - name: Clone html-en Repository
         run: |
-          cd ..
           git clone https://github.com/openmlsys/html-en.git
-
-      # Copy the built HTML docs to html-en
-      - name: Copy Built Docs to html-en
-        run: |
-          cp -r d2l-book/_build/html/* html-en/
+          cp -r _build/html/* html-en/
 
       # Commit and push the updated docs
       - name: Commit and Push Changes
