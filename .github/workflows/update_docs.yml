@@ -52,7 +52,8 @@ jobs:
 
       # Clone the html-en repository
       - run: cd ..
-      - run: git clone https://github.com/openmlsys/html-en.git
+      - run: |
+          git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/openmlsys/html-en.git
       - run: cp -r _build/html/* html-en/
       - run: |
           cd html-en 
@@ -60,4 +61,4 @@ jobs:
           git config user.name "Chivier"
           git config user.email "chivier.humber@outlook.com"
           git commit -m 'update docs'
-          git push -u origin main
+          git push -u https://${{ secrets.GITHUB_TOKEN }}@github.com/openmlsys/html-en.git main
