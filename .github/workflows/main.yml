@@ -32,18 +32,15 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
-
+          cd ..
+          git clone https://github.com/openmlsys/d2l-book.git
+          cd d2l-book
+          pip install .
+          
       - name: Install pandoc
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
-
-      - name: Clone and install d2l-book
-        run: |
-          git clone https://github.com/openmlsys/d2l-book.git
-          cd d2l-book
-          source venv/bin/activate
-          pip install .
 
       - name: Build HTML documentation
         run: |
