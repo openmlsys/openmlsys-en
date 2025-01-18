@@ -1,34 +1,45 @@
 name: CI
 
 on:
-  - push
-  - pull_request
-  - workflow_dispatch  # Allows you to run this workflow manually from the Actions tab
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allows you to run this workflow manually from the Actions tab
 
 jobs:
   build:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - uses: s-weigand/setup-conda@v1
-        name: Set up Conda environment
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
 
-      - run: |
-          conda config --append channels conda-forge
-          conda create -n py38 python=3.8 -y  # Create and activate Python 3.8 environment
-          conda init bash  # Initialize Conda for the bash shell
-          source ~/.bashrc  # Source the updated bashrc to ensure 'conda activate' works
-          conda activate py38  # Activate the environment
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - run: conda activate py38 && pip install -r requirements.txt
+      - name: Install pandoc
+        run: |
+          # Install pandoc using apt
+          sudo apt-get update
+          sudo apt-get install -y pandoc=2.17-1
 
-      - run: conda activate py38 && conda install -y pandoc==2.17
-
-      - run: |
+      - name: Clone and install d2l-book
+        run: |
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
-          pip install .  # Install the package from the cloned repo
-          
-      - run: d2lbook build html  # Build HTML documentation
+          pip install .
+
+      - name: Build HTML documentation
+        run: |
+          source venv/bin/activate
+          d2lbook build html
