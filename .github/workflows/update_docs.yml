@@ -1,14 +1,10 @@
 name: Update Docs
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
+  - push
+  - pull_request
+  - workflow_dispatch  # Allows you to run this workflow manually from the Actions tab
+
 
 jobs:
   if_merged:
