@@ -51,13 +51,11 @@ jobs:
           sh build_html.sh
 
       # Clone the html-en repository
-      - name: Clone html-en Repository
-        run: |
-          git clone https://github.com/openmlsys/html-en.git
-          cp -rf _build/html/* html-en/
-          cd html-en
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - run: cd ..
+      - run: git clone https://github.com/openmlsys/html-en.git
+      - run: cp -r _build/html/* html-en/
+      - run: |
+          cd html-en 
           git add .
-          git diff --quiet || git commit -m 'Update English docs'
-          git push || echo "No changes to push"
+          git commit -m 'update docs'
+          git push
