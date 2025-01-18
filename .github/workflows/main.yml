@@ -16,12 +16,14 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: '3.8'
-      - run: conda config --append channels conda-forge
-      - run: python3 -m pip install -r requirements.txt
+      - run: |
+          conda config --append channels conda-forge
+          conda install -y python=3.8
+      - run: python3.8 -m pip install -r requirements.txt
       - run: conda install -y pandoc==2.17
 
       - run: |
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
-          python3 -m pip install .
+          python3.8 -m pip install .
       - run: d2lbook build html
