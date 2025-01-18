@@ -32,8 +32,6 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
-          pip install recommonmark==0.7.1
-          pip install sphinxcontrib-bibtex==2.4.0 
 
       - name: Install pandoc
         run: |
@@ -44,6 +42,7 @@ jobs:
         run: |
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
+          source venv/bin/activate
           pip install .
 
       - name: Build HTML documentation
