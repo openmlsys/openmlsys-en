@@ -11,32 +11,72 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: s-weigand/setup-conda@v1
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - run: |
-          conda config --append channels conda-forge
-          conda init bash  # Initialize Conda for the bash shell
-          source ~/.bashrc  # Source the updated bashrc to ensure 'conda activate' works
-          conda create -n py38 python=3.8 -y  # Create and activate Python 3.8 environment
-          conda activate py38  # Activate the environment
+      # Set up Python 3.8
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
 
-      - run: conda install -y -c conda-forge pandoc==2.17  # Install pandoc and other dependencies
-      - run: pip install -r requirements.txt
-      - run: pip install sphinx-mathjax-offline
+      # Cache Python packages to speed up builds
+      - name: Cache Python packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-      - run: |
+      # Install Python dependencies
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install sphinx-mathjax-offline
+
+      # Install Pandoc using apt-get
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      # Clone and install the d2l-book repository
+      - name: Clone and install d2l-book
+        run: |
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
-          pip install .  # Install the package from the cloned repo
-      - run: sh build_html.sh  # Run the HTML build script
+          pip install .
 
-      - run: cd ..
-      - run: git clone https://github.com/openmlsys/html-en.git
-      - run: cp -r d2l-book/_build/html/* html-en/  # Copy the built docs to the html-en repo
+      # Build the HTML documentation
+      - name: Build HTML Documentation
+        run: |
+          source ../venv/bin/activate
+          sh build_html.sh
 
-      - run: |
+      # Clone the html-en repository
+      - name: Clone html-en Repository
+        run: |
+          cd ..
+          git clone https://github.com/openmlsys/html-en.git
+
+      # Copy the built HTML docs to html-en
+      - name: Copy Built Docs to html-en
+        run: |
+          cp -r d2l-book/_build/html/* html-en/
+
+      # Commit and push the updated docs
+      - name: Commit and Push Changes
+        run: |
           cd html-en
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m 'update english docs'
-          git push
+          # Commit only if there are changes
+          git diff --quiet || git commit -m 'Update English docs'
+          # Push changes if there are any
+          git push || echo "No changes to push"
