@@ -1,14 +1,9 @@
 name: Update Docs
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
+  - push
+  - pull_request
+  - workflow_dispatch 
 
 jobs:
   if_merged:
