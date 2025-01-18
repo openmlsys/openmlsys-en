@@ -1,27 +1,48 @@
-name: CI
+name: D2l Test
 
 on:
-- push
-- pull_request
-- workflow_dispatch  # Allows you to run this workflow manually from the Actions tab
+  - push
+  - pull_request
+  - workflow_dispatch  # Allows you to run this workflow manually from the Actions tab
 
 jobs:
   build:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: s-weigand/setup-conda@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Set up Python 3.8
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
-      - run: conda config --append channels conda-forge
-      - run: python3 -m pip install -r requirements.txt
-      - run: conda install -y pandoc==2.17
 
-      - run: |
+      - name: Cache Python packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          cd ..
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
-          python3 -m pip install .
-      - run: d2lbook build html
+          pip install .
+          
+      - name: Install pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Build HTML documentation
+        run: |
+          source venv/bin/activate
+          d2lbook build html
