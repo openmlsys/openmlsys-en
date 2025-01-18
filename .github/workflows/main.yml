@@ -1,4 +1,4 @@
-name: D2l Test
+name: CI
 
 on:
   - push
@@ -18,10 +18,13 @@ jobs:
       - run: |
           conda config --append channels conda-forge
           conda create -n py38 python=3.8 -y  # Create and activate Python 3.8 environment
-          conda activate py38
-          conda install -y pandoc==2.17
+          conda init bash  # Initialize Conda for the bash shell
+          source ~/.bashrc  # Source the updated bashrc to ensure 'conda activate' works
+          conda activate py38  # Activate the environment
 
       - run: conda activate py38 && pip install -r requirements.txt
+
+      - run: conda activate py38 && conda install -y pandoc==2.17
 
       - run: |
           git clone https://github.com/openmlsys/d2l-book.git

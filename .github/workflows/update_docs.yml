@@ -9,25 +9,32 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-20.04
+
     steps:
       - uses: actions/checkout@v2
       - uses: s-weigand/setup-conda@v1
+
       - run: |
           conda config --append channels conda-forge
-      - run: conda create -n py38 python=3.8 -y
-      - run: conda activate py38
-      - run: conda install -y -c conda-forge python=3.8 pandoc==2.17
+          conda init bash  # Initialize Conda for the bash shell
+          source ~/.bashrc  # Source the updated bashrc to ensure 'conda activate' works
+          conda create -n py38 python=3.8 -y  # Create and activate Python 3.8 environment
+          conda activate py38  # Activate the environment
+
+      - run: conda install -y -c conda-forge pandoc==2.17  # Install pandoc and other dependencies
       - run: pip install -r requirements.txt
       - run: pip install sphinx-mathjax-offline
 
       - run: |
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
-          python3.8 -m pip install .
-      - run: sh build_html.sh
+          pip install .  # Install the package from the cloned repo
+      - run: sh build_html.sh  # Run the HTML build script
+
       - run: cd ..
       - run: git clone https://github.com/openmlsys/html-en.git
-      - run: cp -r openmlsys-en/_build/html/*  html-en/
+      - run: cp -r d2l-book/_build/html/* html-en/  # Copy the built docs to the html-en repo
+
       - run: |
           cd html-en
           git add .
