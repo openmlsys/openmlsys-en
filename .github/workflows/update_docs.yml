@@ -54,16 +54,10 @@ jobs:
       - name: Clone html-en Repository
         run: |
           git clone https://github.com/openmlsys/html-en.git
-          cp -r _build/html/* html-en/
-
-      # Commit and push the updated docs
-      - name: Commit and Push Changes
-        run: |
+          cp -rf _build/html/* html-en/
           cd html-en
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          # Commit only if there are changes
           git diff --quiet || git commit -m 'Update English docs'
-          # Push changes if there are any
           git push || echo "No changes to push"
