@@ -25,11 +25,11 @@ jobs:
       - run: sh build_html.sh
       - run: cd ..
       - run: git clone https://github.com/openmlsys/openmlsys.github.io.git
-      - run: cp -r openmlsys-zh/_build/html/*  openmlsys.github.io/docs/
+      - run: cp -r openmlsys-en/_build/html/*  openmlsys.github.io/docs/
       - run: |
           cd openmlsys.github.io
           git add .
-          git commit -m 'update docs'
+          git commit -m 'update english docs'
           git push
          
           
