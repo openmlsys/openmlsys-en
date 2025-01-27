@@ -11,34 +11,20 @@ jobs:
 
     steps:
       # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       # Set up Python 3.8
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
-      # Cache Python packages to speed up builds
-      - name: Cache Python packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-
       # Install Pandoc using apt-get
-      - name: Install Pandoc
-        run: |
+      - run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
           
       # Install Python dependencies and build the HTML documentation
-      - name: Install dependencies
-        run: |
+      - run: |
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
@@ -53,7 +39,7 @@ jobs:
       # Clone the html-en repository
       - run: cd ..
       - run: |
-          git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/openmlsys/html-en.git
+          git clone https://github.com/openmlsys/html-en.git
       - run: cp -r _build/html/* html-en/
       - run: |
           cd html-en 
@@ -61,4 +47,4 @@ jobs:
           git config user.name "Chivier"
           git config user.email "chivier.humber@outlook.com"
           git commit -m 'update docs'
-          git push -u https://${{ secrets.GITHUB_TOKEN }}@github.com/openmlsys/html-en.git main
+          git push -u https://github.com/openmlsys/html-en.git main
