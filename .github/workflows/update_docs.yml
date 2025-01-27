@@ -50,3 +50,4 @@ jobs:
           git config user.email "chivier.humber@outlook.com"
           git commit -m 'update docs'
           git push https://$PAT_TOKEN@github.com/openmlsys/html-en.git HEAD:main
+
