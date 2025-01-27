@@ -7,7 +7,6 @@ on:
 
 env:
   PYTHON_VERSION: '3.8'
-  DEST_REPO: 'openmlsys/html-en'
   GIT_USER_NAME: 'GitHub Actions Bot'
   GIT_USER_EMAIL: 'github-actions[bot]@users.noreply.github.com'
 
@@ -57,18 +56,20 @@ jobs:
           source venv/bin/activate
           sh build_html.sh
 
-      - name: Deploy to html-en repository
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Deploy to pages branch
         run: |
-          # Clone the destination repository
-          git clone https://${GH_TOKEN}@github.com/${DEST_REPO}.git
+          # Create and switch to a new worktree for the pages branch
+          git worktree add --detach pages
+          cd pages
+          git checkout pages || git checkout --orphan pages
+          
+          # Remove existing files to prepare for new content
+          git rm -rf . || true
           
           # Copy built documentation
-          cp -r _build/html/* html-en/
+          cp -r ../_build/html/* .
           
           # Configure git
-          cd html-en
           git config user.name "${GIT_USER_NAME}"
           git config user.email "${GIT_USER_EMAIL}"
           
@@ -82,15 +83,18 @@ jobs:
             Run ID: ${{ github.run_id }}
             Triggered by: ${{ github.event_name }}"
             
-            # Push changes
-            git push origin main
+            # Push changes to pages branch
+            git push origin pages
           else
             echo "No changes to commit"
           fi
+          
+          # Clean up the worktree
+          cd ..
+          git worktree remove pages
 
       - name: Clean up
         if: always()
         run: |
           rm -rf venv
-          rm -rf html-en
           rm -rf d2l-book
