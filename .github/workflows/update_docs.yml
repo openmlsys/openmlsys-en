@@ -55,23 +55,16 @@ jobs:
         run: |
           source venv/bin/activate
           sh build_html.sh
-
       - name: Deploy to pages branch
         run: |
           # Create and switch to a new worktree for the pages branch
           git worktree add --detach pages
           cd pages
           
-          # Fetch and checkout pages branch, create if it doesn't exist
+          # Delete pages branch if it exists and create a new orphan branch
           git fetch origin pages || true
-          git checkout pages || git checkout --orphan pages
-          
-          # If the branch exists, pull latest changes
-          if git rev-parse --verify origin/pages >/dev/null 2>&1; then
-            git pull origin pages
-          fi
-          
-          # Remove existing files to prepare for new content
+          git branch -D pages || true
+          git checkout --orphan pages
           git rm -rf . || true
           
           # Copy built documentation
@@ -81,21 +74,17 @@ jobs:
           git config user.name "${GIT_USER_NAME}"
           git config user.email "${GIT_USER_EMAIL}"
           
-          # Check if there are changes to commit
-          if [[ -n $(git status -s) ]]; then
-            git add .
-            git commit -m "docs: update documentation
-            
-            Automated update by GitHub Actions
-            Workflow: ${{ github.workflow }}
-            Run ID: ${{ github.run_id }}
-            Triggered by: ${{ github.event_name }}"
-            
-            # Push changes to pages branch
-            git push origin pages
-          else
-            echo "No changes to commit"
-          fi
+          # Add and commit all changes
+          git add .
+          git commit -m "docs: update documentation
+          
+          Automated update by GitHub Actions
+          Workflow: ${{ github.workflow }}
+          Run ID: ${{ github.run_id }}
+          Triggered by: ${{ github.event_name }}"
+          
+          # Force push to pages branch
+          git push -f origin pages
           
           # Clean up the worktree
           cd ..
