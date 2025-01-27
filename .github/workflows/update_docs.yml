@@ -47,4 +47,4 @@ jobs:
           git config user.name "Chivier"
           git config user.email "chivier.humber@outlook.com"
           git commit -m 'update docs'
-          git push -u https://github.com/openmlsys/html-en.git main
+          git push
