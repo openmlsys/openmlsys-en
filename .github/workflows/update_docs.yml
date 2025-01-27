@@ -2,14 +2,11 @@ name: Update Docs
 
 on:
   push:
-    branches:
-      - main  # specify branches if needed
   pull_request:
   workflow_dispatch:
 
 env:
   PYTHON_VERSION: '3.8'
-  DEST_REPO: 'openmlsys/html-en'
   GIT_USER_NAME: 'GitHub Actions Bot'
   GIT_USER_EMAIL: 'github-actions[bot]@users.noreply.github.com'
 
@@ -58,42 +55,43 @@ jobs:
         run: |
           source venv/bin/activate
           sh build_html.sh
-
-      - name: Deploy to html-en repository
-        if: github.event_name != 'pull_request'  # Don't deploy on PRs
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Deploy to pages branch
         run: |
-          # Clone the destination repository
-          git clone https://${GH_TOKEN}@github.com/${DEST_REPO}.git
+          # Create and switch to a new worktree for the pages branch
+          git worktree add --detach pages
+          cd pages
+          
+          # Delete pages branch if it exists and create a new orphan branch
+          git fetch origin pages || true
+          git branch -D pages || true
+          git checkout --orphan pages
+          git rm -rf . || true
           
           # Copy built documentation
-          cp -r _build/html/* html-en/
+          cp -r ../_build/html .
           
           # Configure git
-          cd html-en
           git config user.name "${GIT_USER_NAME}"
           git config user.email "${GIT_USER_EMAIL}"
           
-          # Check if there are changes to commit
-          if [[ -n $(git status -s) ]]; then
-            git add .
-            git commit -m "docs: update documentation
-            
-            Automated update by GitHub Actions
-            Workflow: ${{ github.workflow }}
-            Run ID: ${{ github.run_id }}
-            Triggered by: ${{ github.event_name }}"
-            
-            # Push changes
-            git push origin main
-          else
-            echo "No changes to commit"
-          fi
+          # Add and commit all changes
+          git add .
+          git commit -m "docs: update documentation
+          
+          Automated update by GitHub Actions
+          Workflow: ${{ github.workflow }}
+          Run ID: ${{ github.run_id }}
+          Triggered by: ${{ github.event_name }}"
+          
+          # Force push to pages branch
+          git push -f origin pages
+          
+          # Clean up the worktree
+          cd ..
+          git worktree remove pages
 
       - name: Clean up
         if: always()
         run: |
           rm -rf venv
-          rm -rf html-en
           rm -rf d2l-book
