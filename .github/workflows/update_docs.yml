@@ -1,30 +1,23 @@
 name: Update Docs
-
 on:
   - push
   - pull_request
-  - workflow_dispatch 
-
+  - workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-20.04
-
     steps:
       # Checkout the repository
       - uses: actions/checkout@v2
-
       # Set up Python 3.8
       - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
-
-
-      # Install Pandoc using apt-get
+      # Install Pandoc
       - run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
-          
-      # Install Python dependencies and build the HTML documentation
+      # Install dependencies and build docs
       - run: |
           python -m venv venv
           source venv/bin/activate
@@ -36,18 +29,17 @@ jobs:
           pip install .
           cd ..
           sh build_html.sh
-
-      # Clone the html-en repository
+      # Clone html-en and push updates with PAT auth
       - run: cd ..
       - run: |
           git clone https://github.com/openmlsys/html-en.git
       - run: cp -r _build/html/* html-en/
-      - env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          cd html-en 
+      - run: |
+          cd html-en
+          # Authenticate with PAT before pushing
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/openmlsys/html-en.git
           git add .
           git config user.name "Chivier"
           git config user.email "chivier.humber@outlook.com"
           git commit -m 'update docs'
-          git push https://$PAT_TOKEN@github.com/openmlsys/html-en.git HEAD:main
+          git push origin main
