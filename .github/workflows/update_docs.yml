@@ -3,7 +3,7 @@ name: Update Docs
 on:
   push:
   pull_request:
-  workflow_dispatch 
+  workflow_dispatch:
 
 env:
   PYTHON_VERSION: '3.8'
