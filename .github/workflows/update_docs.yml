@@ -29,11 +29,11 @@ jobs:
       # Modified these steps for proper authentication
       - name: Clone and push to html-en
         run: |
-          git clone https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/openmlsys/html-en.git
+          git clone https://${{ secrets.GH_TOKEN }}@github.com/openmlsys/html-en.git
           cp -r _build/html/* html-en/
           cd html-en
-          git config user.name "Chivier"
-          git config user.email "chivier.humber@outlook.com"
+          git config user.name 'GitHub Actions Bot'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
           git commit -m 'update docs'
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/openmlsys/html-en.git main
+          git push https://${{ secrets.GH_TOKEN }}@github.com/openmlsys/html-en.git main
