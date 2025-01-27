@@ -68,7 +68,7 @@ jobs:
           git rm -rf . || true
           
           # Copy built documentation
-          cp -r ../_build/html/* .
+          cp -r ../_build/html .
           
           # Configure git
           git config user.name "${GIT_USER_NAME}"
