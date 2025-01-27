@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>1. Preface &#8212; Machine Learning Systems: Design and Implementation 1.0.0 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Computational Graph" href="../chapter_computational_graph/index.html" />
+    <link rel="prev" title="Machine Learning Systems: Design and Implementation" href="../index.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active"><span class="section-number">1. </span>Preface</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_preface/index.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          
+              <a  class="mdl-navigation__link" href="https://github.com/openmlsys/openmlsys-en">
+                  <i class="fab fa-github"></i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://openmlsys.github.io/">
+                  <i class="fas fa-external-link-alt"></i>
+                  中文版
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/logo-with-text.png" alt="Machine Learning Systems: Design and Implementation"/>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_computational_graph/index.html">2. Computational Graph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/background_and_functionality.html">2.1. Computational Graph Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/components_of_computational_graph.html">2.2. Computational Graph Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/generation_of_computational_graph.html">2.3. Generating a Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/schedule_of_computational_graph.html">2.4. Scheduling and Executing Computational Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html">2.5. Chapter Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html#further-reading">2.6. Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/logo-with-text.png" alt="Machine Learning Systems: Design and Implementation"/>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_computational_graph/index.html">2. Computational Graph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/background_and_functionality.html">2.1. Computational Graph Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/components_of_computational_graph.html">2.2. Computational Graph Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/generation_of_computational_graph.html">2.3. Generating a Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/schedule_of_computational_graph.html">2.4. Scheduling and Executing Computational Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html">2.5. Chapter Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html#further-reading">2.6. Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="preface">
+<h1><span class="section-number">1. </span>Preface<a class="headerlink" href="#preface" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="background">
+<h2><span class="section-number">1.1. </span>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h2>
+<p>In 2020, I joined the School of Informatics at the University of
+Edinburgh, which is considered one of the birthplaces of Artificial
+Intelligence (AI) research. The university offers machine learning
+courses that cover a wide range of topics, including natural language
+processing, computer vision, and computational neuroscience.
+Additionally, the university is well-known for providing a complete
+series of fundamental courses on computer systems, such as operating
+systems, programming languages, compilers, and computer architecture.
+However, when I asked my students about how computer systems are
+utilized to deploy and accelerate computation in machine learning, many
+of them appeared puzzled. This led me to contemplate whether the
+University of Edinburgh, along with other universities worldwide, should
+expand their curricula by adding a course that bridges the gap between
+machine learning and computer systems.</p>
+<p>Initially, my idea was to expand an existing course. At the time, the
+“AI Systems” course at the University of California, Berkeley was
+particularly popular. It explored various research directions in machine
+learning systems, with an emphasis on studying research papers.
+Unfortunately, many of these papers did not stand the test of time, and
+the course did not provide a comprehensive architectural overview of the
+knowledge. Consequently, students were unable to gain a complete
+understanding of the subject or learn how to construct a machine
+learning system from scratch. I then looked to other universities, where
+I discovered that the University of Washington offered a brief course
+called “Deep Learning Systems,” which focused on the compilation process
+of machine learning programs. However, the course primarily centered
+around Apache TVM, a compiler stack for deep learning systems, and
+lacked a systematic introduction to machine learning systems. Stanford
+University also had a course in this area, “Machine Learning Systems
+Design,” but it focused on topics such as data cleansing, management,
+and annotation, as databases were the course designer’s primary
+expertise.</p>
+<p>In my search for a suitable course, I expanded my scope to Microsoft
+Research Asia. Their “AI Systems” course seemed like the closest match
+to my expectations at the time, as it elaborated on the design concepts
+of machine learning systems. However, as I prepared to teach it to
+undergraduates, I realized that it provided only a general introduction
+to the core design concepts of machine learning systems and assumed
+students had a solid foundational knowledge of computer systems. It was
+better suited for doctoral students than undergraduates. In fact, all
+the courses I previously mentioned focused on studying research papers
+rather than on easily comprehensible textbooks that provide a clear
+knowledge map. Consequently, the materials involved in these courses
+were filled with scattered ideas, creating significant obstacles for
+students attempting to learn about machine learning systems.</p>
+<p>On the flip side, 2020 was a year in which we saw the emergence of
+excellent course materials, providing fundamental knowledge about
+operating systems, databases, distributed systems, and even machine
+learning algorithms. However, it remained difficult to find a textbook
+that systematically introduces machine learning systems. Many enterprise
+and university labs needed to expend significant resources in order to
+train students and engineers from scratch and enhance their
+understanding of the fundamental architecture of machine learning
+systems. The absence of such textbooks presented a huge challenge in
+developing academic and industry talent. Against this backdrop, the idea
+of writing a textbook on machine learning systems began to take shape in
+my mind.</p>
+</div>
+<div class="section" id="beginning">
+<h2><span class="section-number">1.2. </span>Beginning<a class="headerlink" href="#beginning" title="Permalink to this heading">¶</a></h2>
+<p>When I shared this idea with my friends, they recognized the immense
+value of writing such a textbook. However, the preparation and writing
+process involved could be a daunting uphill battle. My postdoctoral
+mentor advised me to focus on publishing high-impact papers at the
+beginning of my faculty career instead of spending significant amounts
+of time and energy on a book that may not even be published. Other
+professors preferred to revise existing textbooks rather than write new
+ones, particularly in the field of machine learning systems, which
+evolve rapidly through a process of trial and error. Even if a new book
+were published, it may become obsolete quickly due to technological
+advancements over time.</p>
+<p>Despite encountering several obstacles, the idea of writing a textbook
+on machine learning systems did not fade away until I went to China for
+a holiday and spoke with Xuefeng Jin, the architect of MindSpore. We
+first met in London around Christmas time in 2019 when he was leading
+the development of MindSpore 1.0, which had yet to be launched. We
+became acquainted through our mutual interest in the development of
+machine learning systems. In 2018, I co-built a new machine learning
+framework from scratch, similar to PyTorch, with my colleagues. Although
+the project ended due to insufficient resources, the experience
+motivated me to publish several papers on machine learning systems.
+Xuefeng and I both recognized how challenging it was to develop AI
+systems and to find experts in machine learning system development.
+Students often focused more on machine learning algorithms and had only
+a superficial understanding of key system design principles. They did
+not realize the significance of these principles until they applied
+machine learning technologies in practice, but by that point, it was too
+late to learn them. I shared my idea with Xuefeng about writing a
+textbook on machine learning systems and anticipated that it might take
+three to four years to complete. Xuefeng had a similar idea and asked
+whether he could assist in any way.</p>
+<p>Xuefeng’s offer was enlightening. I started asking myself: why not break
+the conventional pattern of book writing, which follows the chronicle of
+discipline development over years by one or two professors. This pattern
+is similar to the waterfall model in traditional software development,
+but with technological advancements, software development has evolved to
+open-source agile development. Therefore, why should book writing follow
+the outdated approach? A good example of this is the
+<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\emph{Deep Dive into Deep Learning}`</span></a> book, compiled by the
+MXNet open-source community. I immediately invited Hao Dong, an
+assistant professor at Peking University and co-founder of the
+TensorLayer open-source community, to collaborate with us. Excited about
+this prospect, Xuefeng invited his colleague, Zhiliang Gan, to join us.
+We were committed to creating a new textbook and finally settled down to
+writing.</p>
+<p>After several rounds of discussion, we named the book <strong>Machine Learning
+Systems: Design and Implementation</strong>. Our intention was to introduce the
+time-tested design principles of machine learning systems and share a
+wealth of system implementation experience, so that students could learn
+how to analyze and solve problems in future work and scientific
+research.</p>
+</div>
+<div class="section" id="community-building">
+<h2><span class="section-number">1.3. </span>Community Building<a class="headerlink" href="#community-building" title="Permalink to this heading">¶</a></h2>
+<p>Since the field of machine learning systems is an evolving discipline
+that continually nurtures a variety of research subjects, I pondered how
+to create an author community to ensure the book’s sustainability. As my
+research expertise focuses on large-scale software systems, I chose to
+build a community by referencing several key design points of
+distributed systems, as follows:</p>
+<ul class="simple">
+<li><p><strong>Prevention of single-point failure or bottleneck:</strong> Modern
+distributed systems are typically designed to separate the control
+plane from the data plane to avoid single-point failure or
+bottleneck. To ensure the sustainability of the book, we decided to
+follow this approach and design a highly scalable writing community
+using a distributed mechanism. The editor spent most of their time
+searching for excellent, proactive, and responsible chapter owners.
+Chapter owners then collaborated with other authors to facilitate
+writing progress on a per-chapter basis, communicating with chapter
+authors about writing details and adhering to given deadlines. The
+editor and chapter owners had weekly meetings to synchronize writing
+progress and ensure that chapter content met the overall expectations
+of the editor and the community in terms of quality.</p></li>
+<li><p><strong>Iterative improvement:</strong> The stochastic gradient descent (SGD)
+optimization algorithm in deep learning uses local gradients to
+perform numerous iterations in complex problems and find local
+optimal solutions. I applied the same principles when designing the
+iterative improvement process for the book’s quality. Similar to
+determining initial parameters, we drafted the first edition of the
+book on Overleaf. Then, we organized the content into a standard Git
+code repository and established a mechanism to encourage readers and
+community members to access issues and pull requests (PRs) on GitHub.
+We also set up comprehensive book building tools, continuous
+integration tools, and contributor seminars. This enabled us to
+continually improve the book’s quality, aiming to achieve optimal
+quality. It was akin to the outcome we achieve in machine learning by
+following the SGD method.</p></li>
+<li><p><strong>High availability:</strong> We established a 24/7 online writing platform
+for participants to develop the book and receive feedback from the
+community in any time zone and language around the world. The Git
+repository was hosted on GitHub and mirrored on Gitee to ensure high
+availability of the writing platform.</p></li>
+<li><p><strong>Content neutralization:</strong> In a distributed system, the equal
+treatment of each node is crucial for long-term operation, as it
+allows for a unified approach to rectifying issues. Similarly, in
+writing a book, we must anticipate potential challenges such as
+outdated designs or the departure of writers, and mitigate them
+through collaboration among participants from diverse backgrounds. We
+emphasize the importance of creating neutral, objective, and
+inclusive content and ensuring that any issues that arise do not
+impede progress.</p></li>
+</ul>
+<p>## Current Situation and Future Outlook</p>
+<p>With the established mechanism, writing progressed smoothly and more
+participants joined the project. My former students Xiulong Yuan, Zihan
+Ding, Yao Fu, Jie Ren, and Wenteng Liang were also dedicated to writing
+and editing this book. Jiarong Han and Cheng Lai from Peng Cheng
+Laboratory, along with numerous MindSpore developers all made
+significant contributions to the book. Many senior designers of machine
+learning systems also held discussions with us through various channels
+and provided valuable feedback for the book. In addition, many academic
+and industry top minds shared their thoughts with us. And worldwide,
+talented students participated in writing. They included Jiankai Sun
+from Stanford University, Peiyuan Liao from Carnegie Mellon University,
+Hanchen Wang from Cambridge University, and Pei Mu from the University
+of Edinburgh. Kaiyan Xiao, a machine learning expert from
+GlaxoSmithKline PLC, also became one of the authors. Furthermore,
+professors Peter Pietzuch from Imperial College London and Lei Chen from
+Hong Kong University of Science and Technology, among others, provided
+continuous writing advice to enhance the book’s quality.</p>
+<p>After we implemented the “distributed system” for book writing, the
+book’s quality has continually improved. When we released the book as an
+open-source project, the number of participants rapidly increased,
+coming as a major surprise to us. Driven by the open-source community,
+the English and Chinese versions of the book have been advanced. This
+was the first time that I realized the huge benefit of using the idea of
+distributed systems and the knowledge of machine learning in solving
+complex problems in real life.</p>
+<p>A single tree is too weak to withstand a sandstorm. Similarly, it was
+the forest of friends and the power of the community that gave us the
+courage to take the very first and crucial step in writing this book. I
+hope that this way of thinking can inspire and help in finding solutions
+to other complex problems.</p>
+<p>By May 2022, the core authors and editors (Luo Mai, Hao Dong, Xuefeng
+Jin, and Zhiliang Gan), the book coordinator (Zhipeng Tan), and the
+following contributors have endeavored to create this book:
+<strong>Introduction</strong> (Luo Mai, Hao Dong, and Zhiliang Gan), <strong>Programming
+Model</strong> (Cheng Lai, Luo Mai, and Hao Dong), <strong>Computational Graph</strong>
+(Jiarong Han, Luo Mai, and Hao Dong), <strong>AI Compiler and Frontend
+Technology</strong> (Zhibo Liang, Qinghua Zhang, Bingjian Huang, Jianfeng Yu,
+and Zhiliang Gan), <strong>AI Compiler Backend and Runtime</strong> (Jinjin Chu, Pei
+Mu, and Fubi Cai), <strong>Hardware Accelerator</strong> (Renwei Zhang, Jie Ren,
+Wenteng Liang, Chao Liu, Gang Chen, and Mingqi Li), <strong>Data Processing</strong>
+(Xiulong Yuan), <strong>Model Deployment</strong> (Gangqiang Han, Yehui Tang,
+Zhiqiang Zhai, and Shanni Li), <strong>Distributed Training</strong> (Luo Mai and
+Peiyuan Liao) <strong>Federated Learning System</strong> (Tiancheng Wu and Hanchen
+Wang), <strong>Recommender System</strong> (Yao Fu, Bei Pei, and Luo Mai),
+<strong>Reinforcement Learning System</strong> (Zihan Ding), <strong>Explainable AI
+System</strong> (Haoyang Li and Xiaohui Li), and <strong>Robotic System</strong> (Jiankai
+Sun and Kaiyan Xiao).</p>
+<p>We welcome new contributors to help improve and expand the book’s
+content. If you’re interested, please contact us through our book’s
+<a class="reference external" href="https://openmlsys.github.io/html-en/">OpenMLSys Community</a>. Let’s
+work together to create a machine learning systems book that advances
+the world.</p>
+<p>Luo Mai</p>
+<p>Edinburgh, United Kingdom</p>
+<p>4th May 2022</p>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">1. Preface</a><ul>
+<li><a class="reference internal" href="#background">1.1. Background</a></li>
+<li><a class="reference internal" href="#beginning">1.2. Beginning</a></li>
+<li><a class="reference internal" href="#community-building">1.3. Community Building</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="../index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Machine Learning Systems: Design and Implementation</div>
+         </div>
+     </a>
+     <a id="button-next" href="../chapter_computational_graph/index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>2. Computational Graph</div>
+        </div>
+     </a>
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

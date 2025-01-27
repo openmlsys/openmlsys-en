@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Modern Robot Learning &#8212; Machine Learning Systems: Design and Implementation 1.0.0 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active">Modern Robot Learning</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_robot_learning/index.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          
+              <a  class="mdl-navigation__link" href="https://github.com/openmlsys/openmlsys-en">
+                  <i class="fab fa-github"></i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://openmlsys.github.io/">
+                  <i class="fas fa-external-link-alt"></i>
+                  中文版
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/logo-with-text.png" alt="Machine Learning Systems: Design and Implementation"/>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_preface/index.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_computational_graph/index.html">2. Computational Graph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/background_and_functionality.html">2.1. Computational Graph Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/components_of_computational_graph.html">2.2. Computational Graph Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/generation_of_computational_graph.html">2.3. Generating a Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/schedule_of_computational_graph.html">2.4. Scheduling and Executing Computational Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html">2.5. Chapter Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html#further-reading">2.6. Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/logo-with-text.png" alt="Machine Learning Systems: Design and Implementation"/>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_preface/index.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_computational_graph/index.html">2. Computational Graph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/background_and_functionality.html">2.1. Computational Graph Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/components_of_computational_graph.html">2.2. Computational Graph Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/generation_of_computational_graph.html">2.3. Generating a Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/schedule_of_computational_graph.html">2.4. Scheduling and Executing Computational Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html">2.5. Chapter Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_computational_graph/summary.html#further-reading">2.6. Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="modern-robot-learning">
+<h1>Modern Robot Learning<a class="headerlink" href="#modern-robot-learning" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>We human can interact with objects with various shapes, sizes, materials
+and physics properties. And we have a fantastic ability to do it under
+different environment settings: we can avoid potentially dangerous
+collisions, we can finish a task with a long horizon; and we can learn
+extremely hard task after practice. However, it still a challenge to
+teach a machine to have above ability. A key challenge in intelligent
+robotics is creating robots that are capable of directly interacting
+with the world around them to achieve their goals. The last decade has
+seen substantial growth in research on the problem of robot
+manipulation, which aims to exploit the increasing availability of
+affordable robot arms and grippers to create robots capable of directly
+interacting with the world to achieve their goals. Learning will be
+central to such autonomous systems, as the real world contains too much
+variation for a robot to expect to have an accurate model of its
+environment, the objects in it, or the skills required to manipulate
+them.</p>
+<div class="figure align-default" id="id3">
+<img alt="../_images/robot_learning_overview.png" src="../_images/robot_learning_overview.png" />
+<p class="caption"><span class="caption-text">An Overview of Common Frameworks for Robot Learning</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="robot-interaction-environments">
+<h2>Robot Interaction Environments<a class="headerlink" href="#robot-interaction-environments" title="Permalink to this heading">¶</a></h2>
+<p>In the realm of robot learning, the process of acquiring the ability to
+manipulate objects in real-world settings can be a time-consuming and
+resource-intensive endeavor. Not only does it demand considerable
+effort, but it also necessitates substantial hardware investments. To
+tackle these challenges and expedite the learning process, researchers
+have turned to data-driven methods that make use of simulation
+environments. By simulating various scenarios, these environments enable
+robots to learn and make informed decisions without the need for
+physically interacting with the real world. In this chapter, we will
+explore the concept of using simulation environments for robot decision
+making, highlighting some simulator examples and their key features,
+while drawing comparisons to the real world and the underlying hardware
+considerations.</p>
+<div class="section" id="learning-in-simulation-environments">
+<h3>Learning in Simulation Environments:<a class="headerlink" href="#learning-in-simulation-environments" title="Permalink to this heading">¶</a></h3>
+<p>Simulators have emerged as indispensable tools for training robots in a
+controlled and efficient manner. Instead of relying solely on real-world
+experiences, simulation environments provide a cost-effective means of
+generating large amounts of training data. This approach not only saves
+time but also minimizes the risks associated with operating physical
+robots in potentially hazardous or expensive settings. Furthermore,
+simulators offer the flexibility to create diverse scenarios and
+manipulate various environmental parameters, allowing researchers to
+thoroughly explore different learning strategies and optimize robot
+decision-making algorithms.</p>
+<div class="section" id="physics-simulation-libraries-and-environments">
+<h4>Physics Simulation Libraries and Environments<a class="headerlink" href="#physics-simulation-libraries-and-environments" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 37%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Year</p></th>
+<th class="head"><p>Simulator</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2012</p></td>
+<td><p>MuJoCo</p></td>
+<td><p>MuJoCo offers a unique
+combination of speed,
+accuracy and modeling power,
+designed from the ground up
+for model-based optimization
+and optimization through
+contacts.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2016</p></td>
+<td><p>PyBullet</p></td>
+<td><p>PyBullet is an easy to use
+Python module for physics
+simulation, robotics and
+deep reinforcement learning
+based on the Bullet Physics
+SDK.</p></td>
+</tr>
+<tr class="row-even"><td><p>2016</p></td>
+<td><p>Unreal CV</p></td>
+<td><p>Unreal CV provides functions
+for perception, navigation,
+physical simulations, and
+learning and evaluation of
+algorithms.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2016</p></td>
+<td><p>DeepMind Lab</p></td>
+<td><p>DeepMind Lab is a
+first-person 3D game
+platform designed for
+research and development of
+general artificial
+intelligence and machine
+learning systems.</p></td>
+</tr>
+<tr class="row-even"><td><p>2016</p></td>
+<td><p>Habitat</p></td>
+<td><p>Habitat-Sim is a flexible,
+high-performance 3D
+simulator with configurable
+agents, sensors, and generic
+3D dataset handling.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2017</p></td>
+<td><p>AI2-THOR</p></td>
+<td><p>AI2-THOR consists of near
+photo-realistic 3D indoor
+scenes, enabling research in
+various domains including
+deep reinforcement learning
+and visual question
+answering.</p></td>
+</tr>
+<tr class="row-even"><td><p>2018</p></td>
+<td><p>CHALET</p></td>
+<td><p>CHALET includes rooms and
+house configurations for
+training and evaluating
+autonomous agents in a
+challenging dynamic
+environment.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2018</p></td>
+<td><p>VirtualHome</p></td>
+<td><p>VirtualHome simulator allows
+the creation of a large
+activity video dataset with
+rich ground-truth, enabling
+training and testing of
+video understanding models.</p></td>
+</tr>
+<tr class="row-even"><td><p>2019</p></td>
+<td><p>VRKitchen</p></td>
+<td><p>VRKitchen enables embodied
+agents to perform complex
+tasks involving fine-grained
+object manipulations in a
+realistic environment, and
+supports learning from
+demonstration.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2020</p></td>
+<td><p>SAPIEN</p></td>
+<td><p>SAPIEN is a realistic and
+physics-rich simulated
+environment that hosts a
+large-scale set of
+articulated objects,
+enabling various robotic
+vision and interaction
+tasks.</p></td>
+</tr>
+<tr class="row-even"><td><p>2020</p></td>
+<td><p>ThreeDWorld</p></td>
+<td><p>ThreeDWorld is a platform
+for interactive multi-modal
+physical simulation,
+supporting real-time
+near-photo-realistic image
+rendering, high-fidelity
+audio rendering, and more.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2021</p></td>
+<td><p>Brax</p></td>
+<td><p>Brax is an open-source
+library for rigid body
+simulation with a focus on
+performance and parallelism
+on accelerators, written in
+JAX.</p></td>
+</tr>
+<tr class="row-even"><td><p>2021</p></td>
+<td><p>iGibson2.0</p></td>
+<td><p>iGibson 2.0 supports object
+states, predicate logic
+functions, and can sample
+valid physical states based
+on logic states.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2021</p></td>
+<td><p>Issac Gym</p></td>
+<td><p>Isaac Gym offers a high
+performance learning
+platform to train policies
+for a wide variety of
+robotics tasks directly on
+GPU.</p></td>
+</tr>
+</tbody>
+</table>
+<p>As shown in above table, there are several simulator examples used in
+the field.</p>
+</div>
+</div>
+<div class="section" id="comparing-simulators-to-the-real-world">
+<h3>Comparing Simulators to the Real World:<a class="headerlink" href="#comparing-simulators-to-the-real-world" title="Permalink to this heading">¶</a></h3>
+<p>While simulation environments offer numerous advantages, it is essential
+to recognize the differences between these virtual worlds and the real
+world. One crucial distinction is the potential discrepancy in physics
+and dynamics modeling. Simulators often approximate physical
+interactions, which may deviate from the intricacies and complexities of
+the actual physical systems. Researchers must be cognizant of these
+limitations and carefully validate their learned policies in real-world
+scenarios to ensure robustness and generalizability.</p>
+<p>Another consideration is the sensory input. In simulation, sensors can
+provide perfect, noise-free data, whereas real-world sensors are prone
+to noise, calibration issues, and limited field of view. Accounting for
+these discrepancies during the learning process and applying appropriate
+techniques, such as sensor noise injection or domain adaptation, is
+crucial for achieving successful transfer of learned policies from
+simulation to reality.</p>
+<div class="figure align-default" id="id4">
+<img alt="../_images/real-world.png" src="../_images/real-world.png" />
+<p class="caption"><span class="caption-text">Robot manipulation environments in real world</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="hardware-considerations">
+<h3>Hardware Considerations:<a class="headerlink" href="#hardware-considerations" title="Permalink to this heading">¶</a></h3>
+<p>While simulation environments alleviate the need for expensive hardware
+setups, certain hardware-related aspects should not be overlooked. To
+accurately simulate robot behaviors, it is necessary to employ hardware
+models and kinematic representations that closely resemble the physical
+robots being studied. Additionally, to ensure efficient and real-time
+simulation, high-performance computing resources may be required,
+especially when dealing with complex scenarios or large-scale
+simulations.</p>
+</div>
+<div class="section" id="conclusion">
+<h3>Conclusion:<a class="headerlink" href="#conclusion" title="Permalink to this heading">¶</a></h3>
+<p>Simulation environments have become invaluable tools for training robots
+and enabling efficient decision making. By leveraging these virtual
+worlds, researchers can expedite the learning process while minimizing
+the costs and risks associated with real-world experimentation. However,
+it is important to acknowledge the limitations of simulations and the
+challenges in transferring learned policies to physical systems. Through
+a combination of careful validation, sensor calibration, and hardware
+modeling, the gap between simulation and reality can be bridged, paving
+the way for robust and reliable robot decision-making capabilities in
+real-world settings.</p>
+</div>
+</div>
+<div class="section" id="robot-skill-learning">
+<h2>Robot Skill Learning<a class="headerlink" href="#robot-skill-learning" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="perception">
+<span id="conclusion-1"></span><h3>Perception<a class="headerlink" href="#perception" title="Permalink to this heading">¶</a></h3>
+<p>In the fascinating realm of robotics, perception plays a crucial role in
+enabling robots to interact with and understand the world around them.
+Just like humans rely on their senses to gather information, robots
+employ various sensing modalities to perceive and make sense of their
+environment. This chapter delves into the realm of robot perception,
+focusing on the integration of multiple sensing modalities and their
+significance in enhancing a robot’s understanding of its surroundings.
+We will explore the diverse range of sensing modalities available to
+robots and their unique capabilities in perception.</p>
+<div class="section" id="visual-perception">
+<h4>Visual Perception:<a class="headerlink" href="#visual-perception" title="Permalink to this heading">¶</a></h4>
+<p>Visual perception is one of the primary sensing modalities for robots,
+mimicking human vision. Cameras and image sensors capture visual data,
+allowing robots to perceive objects, scenes, and spatial information.
+This section discusses the role of computer vision techniques, such as
+image processing, object recognition, and depth estimation, in enabling
+robots to interpret visual data and extract meaningful information.</p>
+</div>
+<div class="section" id="tactile-perception">
+<h4>Tactile Perception:<a class="headerlink" href="#tactile-perception" title="Permalink to this heading">¶</a></h4>
+<p>Tactile perception focuses on a robot’s ability to sense and interpret
+physical contact with objects and surfaces. Tactile sensors embedded in
+robotic fingers or hands provide information about texture, shape,
+hardness, and temperature. This section explores the integration of
+tactile sensors and their application in object manipulation, grasping,
+and fine motor control, enabling robots to interact with the physical
+world in a more human-like manner.</p>
+</div>
+<div class="section" id="auditory-perception">
+<h4>Auditory Perception:<a class="headerlink" href="#auditory-perception" title="Permalink to this heading">¶</a></h4>
+<p>Sound and auditory cues are valuable sources of information for robots.
+By integrating microphones or specialized auditory sensors, robots can
+perceive and analyze audio signals, such as speech, environmental
+sounds, and localization cues. This section discusses the role of
+auditory perception in tasks like speech recognition, sound source
+localization, and human-robot interaction, highlighting the importance
+of audio-based information for comprehensive robot perception.</p>
+</div>
+<div class="section" id="range-sensing">
+<h4>Range Sensing:<a class="headerlink" href="#range-sensing" title="Permalink to this heading">¶</a></h4>
+<p>Range sensing modalities, such as LiDAR (Light Detection and Ranging)
+and depth cameras, provide robots with depth information about their
+surroundings. By emitting and measuring the time-of-flight or structured
+light patterns, robots can create detailed 3D representations of the
+environment. This section explores the capabilities of range sensing
+modalities in object detection, simultaneous localization and mapping
+(SLAM), and navigation in dynamic environments.</p>
+</div>
+<div class="section" id="environmental-sensing">
+<h4>Environmental Sensing:<a class="headerlink" href="#environmental-sensing" title="Permalink to this heading">¶</a></h4>
+<p>Robots can also perceive the environment using various sensors that
+capture information beyond the range of human senses. This section
+covers sensing modalities like infrared sensors, gas sensors, and
+environmental monitoring devices. These sensors enable robots to detect
+temperature, gas concentrations, humidity, and other environmental
+factors, making them suitable for applications in environmental
+monitoring, disaster response, and industrial settings.</p>
+</div>
+<div class="section" id="fusion-and-integration-of-sensing-modalities">
+<h4>Fusion and Integration of Sensing Modalities:<a class="headerlink" href="#fusion-and-integration-of-sensing-modalities" title="Permalink to this heading">¶</a></h4>
+<p>To achieve a more comprehensive understanding of the environment, robots
+often integrate multiple sensing modalities. This section explores the
+challenges and techniques involved in fusing data from different
+sensors, such as sensor calibration, data alignment, and sensor fusion
+algorithms. It also discusses the benefits of sensor fusion in improving
+perception accuracy, robustness, and adaptability in real-world
+scenarios.</p>
+</div>
+<div class="section" id="id1">
+<h4>Conclusion:<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h4>
+<p>Robot perception is a fascinating field that encompasses multiple
+sensing modalities, each contributing to a robot’s ability to perceive
+and understand its surroundings. By integrating visual, tactile,
+auditory, range, and environmental sensing, robots can create a rich
+representation of the world. This chapter provided an overview of
+different sensing modalities, highlighting their significance in
+enabling robots to navigate, interact, and make informed decisions in
+complex environments. By harnessing the power of diverse sensing
+modalities, robots continue to advance in their ability to perceive,
+learn, and adapt, bringing us closer to a world where intelligent
+machines coexist seamlessly with humans.</p>
+</div>
+</div>
+<div class="section" id="decision">
+<h3>Decision<a class="headerlink" href="#decision" title="Permalink to this heading">¶</a></h3>
+<p>In the field of robotics, decision-making plays a vital role in enabling
+robots to interact intelligently with their environment. This chapter
+explores various approaches to robot decision-making, including
+heuristic policy, reinforcement learning, affordance learning, and
+knowledge extraction from large models. By understanding these
+techniques, we can gain insights into how robots can make informed and
+adaptive decisions.</p>
+<div class="section" id="heuristic-policy">
+<h4>Heuristic Policy:<a class="headerlink" href="#heuristic-policy" title="Permalink to this heading">¶</a></h4>
+<p>Heuristic policy refers to a decision-making strategy based on
+predefined rules or heuristics. These rules are typically crafted by
+human experts and capture domain-specific knowledge to guide the robot’s
+actions. Heuristic policies provide a fast and reliable way for robots
+to make decisions in certain contexts, but they may lack adaptability
+and struggle in complex and dynamic environments. Nevertheless, they can
+serve as a useful starting point for robot decision-making before more
+sophisticated techniques are employed.</p>
+</div>
+<div class="section" id="reinforcement-learning">
+<h4>Reinforcement Learning:<a class="headerlink" href="#reinforcement-learning" title="Permalink to this heading">¶</a></h4>
+<p>Reinforcement learning (RL) is a powerful approach that enables robots
+to learn decision-making policies through interactions with the
+environment. In RL, a robot learns to maximize a numerical reward signal
+by taking actions and observing their outcomes. By exploring different
+actions and receiving feedback in the form of rewards or penalties, the
+robot gradually discovers the optimal policy for decision-making.</p>
+<p>Reinforcement learning consists of the following key elements: - Agent:
+The robot or decision-making entity. - Environment: The external world
+or simulation in which the agent interacts. - State: The representation
+of the current situation or context. - Action: The choices available to
+the agent. - Reward: The feedback signal indicating the desirability of
+an action in a given state.</p>
+</div>
+<div class="section" id="affordance-learning">
+<h4>Affordance Learning:<a class="headerlink" href="#affordance-learning" title="Permalink to this heading">¶</a></h4>
+<p>Affordance learning focuses on understanding the action possibilities
+that the environment offers to a robot. It involves perceiving and
+extracting relevant information about the affordances, which are the
+potential actions or interactions that an object or a scene can afford.
+By recognizing and understanding affordances, robots can make more
+informed decisions about their actions.</p>
+<p>Affordance learning includes the following steps: - Perception: Sensing
+the environment through various sensors (e.g., cameras, depth sensors)
+to capture relevant data. - Feature Extraction: Extracting meaningful
+features from the sensory data to represent the objects or scenes. -
+Affordance Recognition: Identifying and categorizing the potential
+actions or interactions that the objects or scenes afford. -
+Decision-Making: Utilizing the recognized affordances to guide the
+robot’s decision-making process.</p>
+<div class="figure align-default" id="id5">
+<img alt="../_images/affordance.png" src="../_images/affordance.png" />
+<p class="caption"><span class="caption-text">Affordance visualization results in robot manipulation tasks</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="knowledge-extraction-from-large-models">
+<h4>Knowledge Extraction from Large Models:<a class="headerlink" href="#knowledge-extraction-from-large-models" title="Permalink to this heading">¶</a></h4>
+<p>With the advancement of deep learning and large-scale language models,
+extracting knowledge from these models has become increasingly valuable
+for decision-making in robotics. These models are trained on vast
+amounts of data and capture intricate patterns and relationships. By
+leveraging this knowledge, robots can benefit from the collective
+intelligence captured in these models.</p>
+<p>Knowledge extraction from large models involves the following steps: -
+Model Interpretability: Understanding how the model processes input data
+and generates predictions or decisions. - Feature Extraction: Extracting
+relevant features or representations from the model that capture the
+essential information for decision-making. - Transfer Learning:
+Transferring knowledge from pre-trained models to improve
+decision-making in specific robotic tasks. - Decision Fusion: Combining
+the knowledge extracted from the large models with other decision-making
+techniques to make more informed and robust decisions.</p>
+<p>Robot decision-making is a critical aspect of enabling robots to
+interact intelligently with their environment. Heuristic policies
+provide initial guidelines, while reinforcement learning allows robots
+to learn optimal decision-making policies through interaction with the
+environment. Affordance learning helps robots recognize and understand
+the potential actions in their surroundings. Finally, knowledge
+extraction from large models leverages the wealth of information
+captured in these models to enhance decision-making capabilities. By
+integrating these techniques, robots can make more adaptive,
+context-aware, and intelligent decisions in various scenarios, leading
+to significant advancements in the field of robot learning. ##
+Deployment in Real Environments</p>
+<p>In the field of robotics, the ability of a robot to make intelligent
+decisions is crucial for its effective interaction with the real world.
+Over the years, significant progress has been made in developing
+algorithms and techniques to enable robots to learn and make decisions
+directly in real environments. In this chapter, we will explore some key
+topics related to robot decision-making, including learning directly in
+real environments, the Sim2Real approach, real-world feedback, learning
+from real-world demonstrations, and the concept of Teacher-Student
+Distillation.</p>
+</div>
+</div>
+<div class="section" id="learning-directly-in-real-environments">
+<h3>Learning Directly in Real Environments<a class="headerlink" href="#learning-directly-in-real-environments" title="Permalink to this heading">¶</a></h3>
+<p>One of the fundamental approaches to robot decision-making involves
+learning directly in real environments. Traditional methods often rely
+on simulations or simplified scenarios, but learning in real-world
+conditions provides robots with a more accurate understanding of the
+complexities and uncertainties they encounter. This approach leverages
+techniques such as reinforcement learning, where robots learn through
+trial and error, optimizing their decision-making policies based on
+feedback received from the environment.</p>
+</div>
+<div class="section" id="sim2real-and-real-world-feedback">
+<h3>Sim2Real and Real-World Feedback<a class="headerlink" href="#sim2real-and-real-world-feedback" title="Permalink to this heading">¶</a></h3>
+<p>While learning in real environments is desirable, it can be challenging
+due to constraints such as safety concerns, cost, and limited access to
+real-world scenarios. The Sim2Real approach addresses these challenges
+by training robots initially in simulation environments, which are
+cheaper, safer, and provide more extensive data. However, to ensure
+effective decision-making in the real world, the trained policies need
+to be transferred and adapted to the physical domain. Real-world
+feedback mechanisms, such as domain adaptation techniques and
+reinforcement learning with fine-tuning, play a vital role in this
+process by bridging the simulation-to-reality gap.</p>
+</div>
+<div class="section" id="learning-from-real-world-demonstrations">
+<h3>Learning from Real-World Demonstrations<a class="headerlink" href="#learning-from-real-world-demonstrations" title="Permalink to this heading">¶</a></h3>
+<p>Learning from real-world demonstrations is another powerful paradigm for
+robot decision-making. By observing and imitating human or expert
+demonstrations, robots can acquire valuable knowledge about appropriate
+decision-making strategies. This approach often involves techniques such
+as imitation learning or inverse reinforcement learning, where robots
+learn from the actions and decisions of skilled individuals. By
+generalizing from a limited number of demonstrations, robots can learn
+to make intelligent decisions in similar contexts.</p>
+</div>
+<div class="section" id="teacher-student-distillation">
+<span id="conclusion-2"></span><h3>Teacher-Student Distillation<a class="headerlink" href="#teacher-student-distillation" title="Permalink to this heading">¶</a></h3>
+<p>Teacher-Student Distillation is a methodology that leverages the
+knowledge of a more capable teacher model to enhance the decision-making
+capabilities of a less experienced student model. In the context of
+robot learning, this approach involves training a high-performing policy
+(the teacher) and using its expertise to guide and improve the learning
+process of a less optimal policy (the student). This technique can be
+particularly useful in scenarios where direct reinforcement learning is
+challenging or time-consuming. The teacher model can provide valuable
+feedback and constraints to facilitate efficient decision-making in
+complex real-world environments.</p>
+</div>
+<div class="section" id="id2">
+<h3>Conclusion<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<p>Robot decision-making in real environments is a multifaceted field that
+encompasses various approaches and techniques. Learning directly in real
+environments, leveraging Sim2Real methods, incorporating real-world
+feedback, learning from demonstrations, and employing Teacher-Student
+Distillation are all essential aspects of advancing the capabilities of
+robots. As researchers and practitioners, we continue to explore these
+topics to enhance robot learning and decision-making, enabling robots to
+operate effectively and intelligently in diverse real-world settings.</p>
+</div>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Modern Robot Learning</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#robot-interaction-environments">Robot Interaction Environments</a><ul>
+<li><a class="reference internal" href="#learning-in-simulation-environments">Learning in Simulation Environments:</a><ul>
+<li><a class="reference internal" href="#physics-simulation-libraries-and-environments">Physics Simulation Libraries and Environments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#comparing-simulators-to-the-real-world">Comparing Simulators to the Real World:</a></li>
+<li><a class="reference internal" href="#hardware-considerations">Hardware Considerations:</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#robot-skill-learning">Robot Skill Learning</a><ul>
+<li><a class="reference internal" href="#perception">Perception</a><ul>
+<li><a class="reference internal" href="#visual-perception">Visual Perception:</a></li>
+<li><a class="reference internal" href="#tactile-perception">Tactile Perception:</a></li>
+<li><a class="reference internal" href="#auditory-perception">Auditory Perception:</a></li>
+<li><a class="reference internal" href="#range-sensing">Range Sensing:</a></li>
+<li><a class="reference internal" href="#environmental-sensing">Environmental Sensing:</a></li>
+<li><a class="reference internal" href="#fusion-and-integration-of-sensing-modalities">Fusion and Integration of Sensing Modalities:</a></li>
+<li><a class="reference internal" href="#id1">Conclusion:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decision">Decision</a><ul>
+<li><a class="reference internal" href="#heuristic-policy">Heuristic Policy:</a></li>
+<li><a class="reference internal" href="#reinforcement-learning">Reinforcement Learning:</a></li>
+<li><a class="reference internal" href="#affordance-learning">Affordance Learning:</a></li>
+<li><a class="reference internal" href="#knowledge-extraction-from-large-models">Knowledge Extraction from Large Models:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#learning-directly-in-real-environments">Learning Directly in Real Environments</a></li>
+<li><a class="reference internal" href="#sim2real-and-real-world-feedback">Sim2Real and Real-World Feedback</a></li>
+<li><a class="reference internal" href="#learning-from-real-world-demonstrations">Learning from Real-World Demonstrations</a></li>
+<li><a class="reference internal" href="#teacher-student-distillation">Teacher-Student Distillation</a></li>
+<li><a class="reference internal" href="#id2">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>
