@@ -1,39 +1,99 @@
 name: Update Docs
+
 on:
-  - push
-  - pull_request
-  - workflow_dispatch
+  push:
+    branches:
+      - main  # specify branches if needed
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.8'
+  DEST_REPO: 'openmlsys/html-en'
+  GIT_USER_NAME: 'GitHub Actions Bot'
+  GIT_USER_EMAIL: 'github-actions[bot]@users.noreply.github.com'
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-20.04
+    
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Updated to v3
         with:
-          python-version: '3.8'
-      - run: |
+          fetch-depth: 0  # Fetch all history for better versioning
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'  # Enable pip caching
+
+      - name: Install system dependencies
+        run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
-      - run: |
+        
+      - name: Setup Python virtual environment
+        run: |
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
+
+      - name: Install Python dependencies
+        run: |
+          source venv/bin/activate
           pip install -r requirements.txt
           pip install sphinx-mathjax-offline
+
+      - name: Install d2l-book
+        run: |
+          source venv/bin/activate
           git clone https://github.com/openmlsys/d2l-book.git
           cd d2l-book
           pip install .
           cd ..
-          sh build_html.sh
-      - run: cd ..
-      # Modified these steps for proper authentication
-      - name: Clone and push to html-en
+
+      - name: Build documentation
         run: |
-          git clone https://${{ secrets.GH_TOKEN }}@github.com/openmlsys/html-en.git
+          source venv/bin/activate
+          sh build_html.sh
+
+      - name: Deploy to html-en repository
+        if: github.event_name != 'pull_request'  # Don't deploy on PRs
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          # Clone the destination repository
+          git clone https://${GH_TOKEN}@github.com/${DEST_REPO}.git
+          
+          # Copy built documentation
           cp -r _build/html/* html-en/
+          
+          # Configure git
           cd html-en
-          git config user.name 'GitHub Actions Bot'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git commit -m 'update docs'
-          git push https://${{ secrets.GH_TOKEN }}@github.com/openmlsys/html-en.git main
+          git config user.name "${GIT_USER_NAME}"
+          git config user.email "${GIT_USER_EMAIL}"
+          
+          # Check if there are changes to commit
+          if [[ -n $(git status -s) ]]; then
+            git add .
+            git commit -m "docs: update documentation
+            
+            Automated update by GitHub Actions
+            Workflow: ${{ github.workflow }}
+            Run ID: ${{ github.run_id }}
+            Triggered by: ${{ github.event_name }}"
+            
+            # Push changes
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Clean up
+        if: always()
+        run: |
+          rm -rf venv
+          rm -rf html-en
+          rm -rf d2l-book
