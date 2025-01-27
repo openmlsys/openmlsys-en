@@ -44,7 +44,5 @@ jobs:
       - run: |
           cd html-en 
           git add .
-          git config user.name "Chivier"
-          git config user.email "chivier.humber@outlook.com"
           git commit -m 'update docs'
           git push
