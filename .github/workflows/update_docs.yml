@@ -18,8 +18,7 @@ jobs:
         with:
           python-version: '3.8'
 
-      - env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+
       # Install Pandoc using apt-get
       - run: |
           sudo apt-get update
@@ -43,11 +42,12 @@ jobs:
       - run: |
           git clone https://github.com/openmlsys/html-en.git
       - run: cp -r _build/html/* html-en/
-      - run: |
+      - env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
           cd html-en 
           git add .
           git config user.name "Chivier"
           git config user.email "chivier.humber@outlook.com"
           git commit -m 'update docs'
           git push https://$PAT_TOKEN@github.com/openmlsys/html-en.git HEAD:main
-
