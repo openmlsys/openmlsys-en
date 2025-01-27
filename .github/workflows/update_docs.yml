@@ -2,10 +2,8 @@ name: Update Docs
 
 on:
   push:
-    branches:
-      - main  # specify branches if needed
   pull_request:
-  workflow_dispatch:
+  workflow_dispatch 
 
 env:
   PYTHON_VERSION: '3.8'
@@ -60,7 +58,6 @@ jobs:
           sh build_html.sh
 
       - name: Deploy to html-en repository
-        if: github.event_name != 'pull_request'  # Don't deploy on PRs
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
