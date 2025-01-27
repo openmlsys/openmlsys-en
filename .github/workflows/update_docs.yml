@@ -61,7 +61,15 @@ jobs:
           # Create and switch to a new worktree for the pages branch
           git worktree add --detach pages
           cd pages
+          
+          # Fetch and checkout pages branch, create if it doesn't exist
+          git fetch origin pages || true
           git checkout pages || git checkout --orphan pages
+          
+          # If the branch exists, pull latest changes
+          if git rev-parse --verify origin/pages >/dev/null 2>&1; then
+            git pull origin pages
+          fi
           
           # Remove existing files to prepare for new content
           git rm -rf . || true
