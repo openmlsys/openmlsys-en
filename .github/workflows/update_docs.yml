@@ -7,17 +7,13 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      # Checkout the repository
       - uses: actions/checkout@v2
-      # Set up Python 3.8
       - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
-      # Install Pandoc
       - run: |
           sudo apt-get update
           sudo apt-get install -y pandoc
-      # Install dependencies and build docs
       - run: |
           python -m venv venv
           source venv/bin/activate
@@ -29,17 +25,14 @@ jobs:
           pip install .
           cd ..
           sh build_html.sh
-      # Clone html-en and push updates with PAT auth
       - run: cd ..
       - run: |
-          git clone https://github.com/openmlsys/html-en.git
+          git clone https://${{ secrets.PAT_TOKEN }}@github.com/openmlsys/html-en.git
       - run: cp -r _build/html/* html-en/
       - run: |
           cd html-en
-          # Authenticate with PAT before pushing
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/openmlsys/html-en.git
-          git add .
           git config user.name "Chivier"
           git config user.email "chivier.humber@outlook.com"
+          git add .
           git commit -m 'update docs'
-          git push origin main
+          git push https://${{ secrets.PAT_TOKEN }}@github.com/openmlsys/html-en.git main
